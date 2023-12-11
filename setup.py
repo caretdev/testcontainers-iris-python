@@ -5,5 +5,10 @@ description = "InterSystems IRIS component of testcontainers-python."
 setup(
     packages=find_namespace_packages(),
     description=description,
-    long_description=open('README.md').read(),
+    install_requires=[
+        "testcontainers-core",
+        "sqlalchemy",
+        "sqlalchemy-iris",
+    ],
+    python_requires=">=3.7",
 )
