@@ -4,7 +4,7 @@ description = "InterSystems IRIS component of testcontainers-python."
 
 setup(
     name="testcontainers-iris",
-    version="1.0.2",
+    version="1.1.0",
     packages=find_namespace_packages(),
     description=description,
     long_description=open('README.md').read(),
