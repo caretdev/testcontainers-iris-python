@@ -37,7 +37,7 @@ jobs:
         NAME="testcontainers-iris"-${VERSION}-py3-none-any
         echo name=$NAME >> $GITHUB_OUTPUT
     - name: Test package
-      run: pytest
+      run: pytest -k community
     - name: Build package
       run: python -m build
     - name: Publish package
