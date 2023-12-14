@@ -39,4 +39,6 @@ iris_container = IRISContainer(
 
 `username`, `password`, `namespace` will be created during start of the container with required values, user will get %All role
 
+[Demo](iris.ipynb) with Jupiter Notebook 
+
 More extensive documentation can be found at [Read The Docs](https://testcontainers-python.readthedocs.io/).
