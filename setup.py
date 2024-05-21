@@ -9,6 +9,7 @@ setup(
         "testcontainers-core",
         "sqlalchemy",
         "sqlalchemy-iris",
+        "requests<2.32.0"
     ],
     python_requires=">=3.7",
 )
