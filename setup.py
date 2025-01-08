@@ -6,7 +6,7 @@ setup(
     packages=find_namespace_packages(),
     description=description,
     install_requires=[
-        "testcontainers-core",
+        "testcontainers",
         "sqlalchemy",
         "sqlalchemy-iris",
         "requests<2.32.0"
