@@ -90,7 +90,7 @@ class IRISContainer(DbContainer):
             dialect="iris",
             username=self.username,
             password=self.password,
-            db_name=self.namespace,
+            dbname=self.namespace,
             host=host,
             port=self.port,
         )
