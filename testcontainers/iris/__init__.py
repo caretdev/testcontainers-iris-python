@@ -54,9 +54,9 @@ class IRISContainer(DbContainer):
         self.with_exposed_ports(self.port)
 
     def _configure(self) -> None:
-        self.with_env("IRIS_USERNAME", self.username)
-        self.with_env("IRIS_PASSWORD", self.password)
-        self.with_env("IRIS_NAMESPACE", self.namespace)
+        # self.with_env("IRIS_USERNAME", self.username)
+        # self.with_env("IRIS_PASSWORD", self.password)
+        # self.with_env("IRIS_NAMESPACE", self.namespace)
         if self.license_key:
             self.with_volume_mapping(
                 self.license_key, "/usr/irissys/mgr/iris.key", "ro"
@@ -64,26 +64,23 @@ class IRISContainer(DbContainer):
 
     def _connect(self) -> None:
         wait_for_logs(self, predicate="Enabling logons")
-        if self.image.startswith("intersystemsdc"):
-            wait_for_logs(self, predicate="executed command")
-        else:
-            if self.namespace.upper() != "USER":
-                cmd = (
-                    f"iris session iris -U %%SYS '##class(%%SQL.Statement).%%ExecDirect(,\"CREATE DATABASE %s\")'"
-                    % (self.namespace,)
-                )
-                self.exec(cmd)
+        if self.namespace.upper() != "USER":
             cmd = (
-                f'iris session iris -U %%SYS \'##class(Security.Users).Create("%s","%s","%s",,"%s")\''
-                % (
-                    self.username,
-                    "%ALL",
-                    self.password,
-                    self.namespace,
-                )
+                f"iris session iris -U %%SYS '##class(%%SQL.Statement).%%ExecDirect(,\"CREATE DATABASE %s\")'"
+                % (self.namespace,)
             )
             res = self.exec(cmd)
             print("res", cmd, res)
+        cmd = (
+            f'iris session iris -U %%SYS \'##class(Security.Users).Create("%s","%s","%s")\''
+            % (
+                self.username,
+                "%ALL",
+                self.password,
+            )
+        )
+        res = self.exec(cmd)
+        print("res", cmd, res)
 
     def get_connection_url(self, host=None) -> str:
         return super()._create_connection_url(

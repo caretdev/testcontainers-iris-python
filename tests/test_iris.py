@@ -17,14 +17,20 @@ def check_connection(iris):
 
 
 def test_community():
-    iris_container = IRISContainer("intersystemsdc/iris-community:2023.1.1.380.0-zpm", **creds)
+    iris_container = IRISContainer("containers.intersystems.com/intersystems/iris-community:latest-em", **creds)
+    with iris_container as iris:
+        check_connection(iris)
+
+
+def test_dccommunity():
+    iris_container = IRISContainer("intersystemsdc/iris-community:latest", **creds)
     with iris_container as iris:
         check_connection(iris)
 
 
 def test_enterprise():
     license_key = os.path.abspath(os.path.expanduser("~/iris.key"))
-    iris_container = IRISContainer("containers.intersystems.com/intersystems/iris:2023.3", license_key=license_key,
+    iris_container = IRISContainer("containers.intersystems.com/intersystems/iris:latest-cd", license_key=license_key,
                                    **creds)
     with iris_container as iris:
         check_connection(iris)
