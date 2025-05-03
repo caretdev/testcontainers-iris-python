@@ -26,7 +26,7 @@ jobs:
       id: set-version
       run: |
         VERSION=$(grep version setup.cfg | cut -d=  -f2 | tr -d '[:blank:]')
-        [ $GITHUB_EVENT_NAME == 'push' ] && VERSION+=b && VERSION+=$(($(git tag -l "*$VERSION*" | cut -db -f2 | sort -n | tail -1)+1)) 
+        VERSION+=b && VERSION+=$(($(git tag -l "*$VERSION*" | cut -db -f2 | sort -n | tail -1)+1))
         [ $GITHUB_EVENT_NAME == 'release' ] && VERSION=${{ github.event.release.tag_name }} && VERSION=${VERSION/v/}
         echo VERSION = $VERSION
         sed -ie "s/version = .*/version = $VERSION/" setup.cfg
@@ -37,7 +37,7 @@ jobs:
         NAME="testcontainers-iris"-${VERSION}-py3-none-any
         echo name=$NAME >> $GITHUB_OUTPUT
     - name: Test package
-      run: pytest -k community
+      run: pytest -vs -k community
     - name: Build package
       run: python -m build
     - name: Publish package
