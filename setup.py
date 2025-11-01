@@ -7,10 +7,9 @@ setup(
     packages=find_namespace_packages(),
     description=description,
     install_requires=[
-        "testcontainers",
-        "sqlalchemy",
-        "sqlalchemy-iris",
-        "requests<2.32.0"
+        "testcontainers>=4.13.2",
+        "sqlalchemy>=1.4.0",
+        "sqlalchemy-iris>=0.15.0"
     ],
     python_requires=">=3.7",
 )
